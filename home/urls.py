@@ -1,9 +1,8 @@
-# example/urls.py
-from django.urls import path
+from django.urls import path # type: ignore
+from . import views
 
-from home.views import index
-
+app_name = "home"
 
 urlpatterns = [
-    path('', index),
+    path("", views.index, name = "index"),
 ]
