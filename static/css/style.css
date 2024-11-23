@@ -153,15 +153,6 @@ figcaption {
     text-align: justify;
 }
 
-.navbar-toggler {
-    padding: .25rem .75rem;
-    font-size: 1.25rem;
-    line-height: 1;
-    background-color: #E11138;
-    border-radius: .35rem;
-    color: white;
-}
-
 .text-body-secondary {
     --bs-text-opacity: 1;
     color: black !important;
@@ -271,7 +262,7 @@ label {
     padding: .10rem .75rem;
     font-size: 1.1rem;
     line-height: 1;
-    background-color: #E11138;
+    background-color: #8A1538;
     border-radius: 10px;
     color: white;
 }
@@ -404,7 +395,6 @@ h3 {
         border-bottom: 1px solid #D6D7DB;
     } .image-header {
         max-width: 100%;
-        margin-top: 20px;
         border-radius: 10px;
     } .col {
         height: auto;
@@ -472,7 +462,24 @@ h3 {
         padding: 20px 30px 0 30px;
     } .fieldWrapper {
         padding: 0 20px !important;
+    } .container .h1-home {
+        margin-top: 20px;
+    } img {
+        margin-top: 20px;
     }
+
+    .list-group, .list-group-item {
+        color: #212529;
+    }
+    .list-group-item {
+        font-size: 20px;
+    } .btn-whatsapp {
+        background-color: #8A1538;
+        color: white;
+        max-width: 250px;
+        margin-bottom: 20px;
+    }
+    
 }
 
 input[type="text"], input[type="number"], input[type="password"] {
