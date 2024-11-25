@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,13 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=cldztbc4jg&xl0!x673!*v2_=p$$eu)=7*f#d0#zs$44xx-h^'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', 'www.linguistichybridity.com']
-
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-=cldztbc4jg&xl0!x673!*v2_=p$$eu)=7*f#d0#zs$44xx-h^')
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1').split(",")
+DJANGO_ENV = os.environ.get('DJANGO_ENV')
+SUPABASE_DB_URL = os.environ.get("SUPABASE_DB_URL")
 
 # Application definition
 
@@ -79,13 +78,22 @@ WSGI_APPLICATION = 'api.wsgi.app'
 # Note: Django modules for using databases are not support in serverless
 # environments like Vercel. You can use a database over HTTP, hosted elsewhere.
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'database',
+# Check if the Supabase database URL is set
+if SUPABASE_DB_URL:
+    # Use the Supabase database configuration
+    DATABASES = {
+        "default": dj_database_url.config(
+            default=SUPABASE_DB_URL, conn_max_age=600
+        )
     }
-}
-
+else:
+    # Use the SQLite database configuration for development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -129,3 +137,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
