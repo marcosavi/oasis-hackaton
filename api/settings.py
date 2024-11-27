@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'blog',
+    'courses',
     
 ]
 
@@ -118,6 +119,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+APPEND_SLASH = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -132,3 +134,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# settings.py
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'login'
