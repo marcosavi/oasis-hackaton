@@ -15,6 +15,11 @@
     padding-bottom: 13px;
 }
 
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: white !important;
+    background: #8A1538;
+}
+
 .item {
     padding-top: 20px;
 }
