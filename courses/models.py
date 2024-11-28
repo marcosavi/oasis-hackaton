@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
 
-
 class Course(models.Model):
     title = models.CharField(max_length=200, unique=True)
     description = models.TextField(null=True, blank=True)
@@ -14,3 +13,5 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+    
+    from django.db import models

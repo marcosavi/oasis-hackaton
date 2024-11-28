@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'home',
     'blog',
     'courses',
+    'certificates',
     
 ]
 

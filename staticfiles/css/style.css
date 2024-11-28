@@ -12,7 +12,16 @@
   }
 
 .additional-padding-bottom {
-    padding-bottom: 10px;
+    padding-bottom: 13px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: white !important;
+    background: #8A1538;
+}
+
+.item {
+    padding-top: 20px;
 }
 
 .qualidade-box {
@@ -65,7 +74,7 @@ header {
 }
 
 .logo {
-    max-width: 250px;
+    max-width: 200px;
     display: flex;
     margin: 0 auto;
     border-radius: 10px;
@@ -79,15 +88,6 @@ header {
 .beneficio-quick {
     align-items: center;
     flex-direction: row !important;
-}
-
-.card-body {
-    flex: 1 1 auto;
-    padding: 30px;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    text-align: center;
 }
 
 .beneficios-quick {
@@ -177,9 +177,19 @@ figcaption {
     padding: 0 30px;
 }
 
+.course-paragraph {
+    font-size: 16px;
+}
+
 .btn-second {
     border: solid 1px #8A1538;
     color: #8A1538;
+}
+
+.cards-courses {
+    gap: 60px;
+    justify-content: center;
+    padding: 60px;
 }
 
 .container .h1-home {

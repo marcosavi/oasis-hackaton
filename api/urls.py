@@ -26,6 +26,7 @@ urlpatterns = [
     path('login/', views.login.as_view(), name = "login"),
     path('logout/', views.logout_view, name="logout"),
     path('courses/', include('courses.urls')),
+    path('certificates/', include('certificates.urls')),
 ]
 
 if settings.DEBUG:

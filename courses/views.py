@@ -3,8 +3,6 @@ from .models import Course
 from .forms import CourseForm
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
-
 @login_required
 def index(request):
     courses = Course.objects.all()
