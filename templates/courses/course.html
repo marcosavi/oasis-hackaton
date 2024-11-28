@@ -53,7 +53,16 @@
           <h3>Item 3-2</h3>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores a nemo perspiciatis cum ab aliquid, commodi error delectus qui maxime ullam aperiam corporis assumenda numquam cumque nobis alias voluptatibus repellat?</p>
         </div>
-        <a href="{% url 'login' %}"><button style="margin-top: 20px;" type="button" class="btn btn-sm btn-main big"><i class="bi bi-patch-check"></i> claim certificate</button></a>
+
+      <form method="post">
+          {% csrf_token %}
+          <br>
+          <label for="user_name">Preferred name on certificate:</label>
+          <input type="text" id="user_name" name="user_name" required>
+          <br>
+          <button type="submit" class="btn btn-sm btn-main big" style="margin-top: 10px;"><i class="bi bi-patch-check"></i> claim certificate</button>
+      </form>
+
       </div>
     </div>
   </div>

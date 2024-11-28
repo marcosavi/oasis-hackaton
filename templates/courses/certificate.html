@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Courses{% endblock %}
+
+{% block content %}
+  <div class="row cards-courses">
+    <div class="card" style="width: 30rem; padding: 0;">
+        <div class="card-body">
+          <img src="{{ certificate.certificate_image.url }}" alt="Certificate" style="max-width: 100%; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 0 2px black">
+          <h5 class="card-title"><b>{{ certificate.user_name }}</b></h5>
+          <p class="additional-padding-bottom course-paragraph" >Official certification after finishing the couse</p>
+          <a href="{{ certificate.certificate_image.url }}" class="btn btn-sm btn-main"  download="{{ certificate.user_name }}_certificate.png"><i class="bi bi-download"></i> download certificate</a>
+        </div>
+    </div>
+{% endblock %}
