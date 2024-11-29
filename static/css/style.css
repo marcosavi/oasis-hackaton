@@ -243,6 +243,7 @@ figcaption {
 
 label {
     margin-bottom: 10px;
+    font-size: 22px;
 }
 
 .p-see-alunos {
@@ -495,9 +496,10 @@ h3 {
     
 }
 
-input[type="text"], input[type="number"], input[type="password"] {
+input[type="text"], input[type="number"], input[type="password"], .fieldWrapper input, input[type="file" i], select {
     border-radius: 10px;
     border: 1px solid #D6D7DB;
+    
 }
 
 @media (min-width: 768px) {

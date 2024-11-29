@@ -64,13 +64,21 @@
         </div>
     
 
-      <form method="post">
+        <form method="post">
           {% csrf_token %}
           <br>
           <label for="user_name">Preferred name on certificate:</label>
           <input type="text" id="user_name" name="user_name" required>
           <br>
-          <button type="submit" class="btn btn-sm btn-main big" style="margin-top: 10px;"><i class="bi bi-patch-check"></i> claim certificate</button>
+          <label for="language">Preferred Language:</label>
+          <select id="language" name="language" required>
+              <option value="en">English</option>
+              <option value="pt">Portuguese</option>
+          </select>
+          <br>
+          <button type="submit" class="btn btn-sm btn-main big" style="margin-top: 15px;">
+              <i class="bi bi-patch-check"></i> claim certificate
+          </button>
       </form>
 
       </div>
