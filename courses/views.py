@@ -37,6 +37,7 @@ def course(request, slug):
         return redirect('courses:conclusion', id=certificate.id)
     return render(request, 'courses/course.html', {'course': course})
 
+@login_required
 def certificate_display(request, id):
     certificate = Certificate.objects.get(id=id)
     return render(request, 'courses/certificate.html', {'certificate': certificate})
