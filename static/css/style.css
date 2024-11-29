@@ -20,14 +20,13 @@
     background: #8A1538;
 }
 
-.item {
-    padding-top: 20px;
-}
-
 .qualidade-box {
     flex-direction: column !important;
     gap: 0px !important;
 }
+  .item {
+    margin-bottom: 30px;
+  }
 
 html {
     font-family: "Inter", sans-serif !important;
@@ -37,6 +36,10 @@ html {
     padding-top: 2rem !important;
     margin: 0 !important;
 }
+
+.scrollspy-example-2 p {
+    margin-bottom: 20px;
+  }
 
 .pb-3 {
     padding-bottom: 1rem !important;
