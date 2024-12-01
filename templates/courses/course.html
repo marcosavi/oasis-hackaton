@@ -61,9 +61,84 @@
         </div>
     
 
-        <form method="post">
+        <br>
+        <div id="quiz-section" class="item">
+          <h3>🧑‍🎓👩‍🎓 Quiz: Answer and Claim your certificate</h3>
+          <br>
+          <form id="quiz-form">
+              <div class="quiz-question" data-correct-answer="b">
+                  <p><b>1. What is the main goal of translanguaging in classrooms?</b></p>
+                  <label>
+                      <input type="radio" name="quiz-answer-1" value="a"> To replace students' native languages.
+                  </label><br>
+                  <label>
+                      <input type="radio" name="quiz-answer-1" value="b"> To maximize communication potential using all linguistic resources.
+                  </label><br>
+                  <label>
+                      <input type="radio" name="quiz-answer-1" value="c"> To enforce a single language policy in schools.
+                  </label>
+              </div>
+      
+              <div class="quiz-question" data-correct-answer="a">
+                  <p><b>2. What does translanguaging include?</b></p>
+                  <label>
+                      <input type="radio" name="quiz-answer-2" value="a"> Code-switching and bilingual practices.
+                  </label><br>
+                  <label>
+                      <input type="radio" name="quiz-answer-2" value="b"> Strict language policies.
+                  </label><br>
+                  <label>
+                      <input type="radio" name="quiz-answer-2" value="c"> Avoidance of native languages.
+                  </label>
+              </div>
+      
+              <div class="quiz-question" data-correct-answer="c">
+                  <p><b>3. Which of the following is a benefit of translanguaging?</b></p>
+                  <label>
+                      <input type="radio" name="quiz-answer-3" value="a"> Restricts creative thinking.
+                  </label><br>
+                  <label>
+                      <input type="radio" name="quiz-answer-3" value="b"> Replaces native languages with dominant languages.
+                  </label><br>
+                  <label>
+                      <input type="radio" name="quiz-answer-3" value="c"> Fosters better communication and understanding.
+                  </label>
+              </div>
+      
+              <div class="quiz-question" data-correct-answer="a">
+                  <p><b>4. Who benefits most from translanguaging?</b></p>
+                  <label>
+                      <input type="radio" name="quiz-answer-4" value="a"> Multilingual students.
+                  </label><br>
+                  <label>
+                      <input type="radio" name="quiz-answer-4" value="b"> Teachers with monolingual classrooms.
+                  </label><br>
+                  <label>
+                      <input type="radio" name="quiz-answer-4" value="c"> Schools with strict language policies.
+                  </label>
+              </div>
+      
+              <div class="quiz-question" data-correct-answer="c">
+                  <p><b>5. Which teaching method aligns with translanguaging?</b></p>
+                  <label>
+                      <input type="radio" name="quiz-answer-5" value="a"> Teaching only in English.
+                  </label><br>
+                  <label>
+                      <input type="radio" name="quiz-answer-5" value="b"> Avoiding all native languages.
+                  </label><br>
+                  <label>
+                      <input type="radio" name="quiz-answer-5" value="c"> Allowing students to use their full linguistic repertoire.
+                  </label>
+              </div>
+      
+              <button type="button" id="quiz-submit" class="btn btn-sm btn-main big" disabled>Submit Quiz</button>
+          </form>
+      </div>
+
+        <form method="post" class="certificate">
           {% csrf_token %}
           <br>
+          <h3>Congratulations 🎉</h3>
           <label for="user_name">Preferred name on certificate:</label>
           <input type="text" id="user_name" name="user_name" required>
           <br>
