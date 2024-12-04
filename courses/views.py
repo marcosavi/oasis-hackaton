@@ -5,7 +5,7 @@ from .forms import CourseForm
 from django.contrib.auth.decorators import login_required
 from django.core.files.base import ContentFile
 
-@login_required
+#@login_required
 def index(request):
     courses = Course.objects.all()
     return render(request, "courses/index.html", {'courses': courses})
@@ -43,7 +43,6 @@ def update_certificate_template(template_image, user_name, language):
     cv2.putText(template, user_name, (text_x, text_y), font, font_scale, font_color, thickness, lineType=line_type)
     return template
 
-@login_required
 def course(request, slug):
     course = get_object_or_404(Course, slug=slug)
     if request.method == 'POST':
@@ -59,12 +58,10 @@ def course(request, slug):
         return redirect('courses:conclusion', id=certificate.id)
     return render(request, 'courses/course.html', {'course': course})
 
-@login_required
 def certificate_display(request, id):
     certificate = Certificate.objects.get(id=id)
     return render(request, 'courses/certificate.html', {'certificate': certificate})
 
-@login_required
 def create_course(request):
     if request.method == "POST":
         form = CourseForm(request.POST)
