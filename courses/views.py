@@ -1,73 +1,91 @@
-import cv2
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Course, Certificate
-from .forms import CourseForm
-from django.contrib.auth.decorators import login_required
-from django.core.files.base import ContentFile
+from PIL import Image, ImageDraw, ImageFont
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
+from django.conf import settings
+import os
 
-#@login_required
 def index(request):
-    courses = Course.objects.all()
-    return render(request, "courses/index.html", {'courses': courses})
+    # Fetch all courses to display on the homepage
+    return render(request, "courses/index.html", {})
 
-def update_certificate_template(template_image, user_name, language):
+
+def update_certificate_template(template_path, user_name, language):
+    # Language-specific templates
     language_templates = {
         'en': 'static/images/template-en.png',
         'pt': 'static/images/template-pt.png',
     }
 
+    # Fallback to English if language template is not found
     template_path = language_templates.get(language, 'static/images/template-en.png')
-    template_image = cv2.imread(template_path)
-    if template_image is None:
-        raise FileNotFoundError(f"Template not found at {template_path}")
     
-    template = template_image.copy()
-    image_height, image_width, _ = template.shape 
+    try:
+        # Load the template image
+        template = Image.open(template_path).convert("RGBA")
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Template not found at {template_path}")
 
-    base_font_scale = 1 
-    font_scale = base_font_scale * (image_width / 1000) 
-    font = cv2.FONT_HERSHEY_SIMPLEX
-    font_color = (0, 0, 0)
-    thickness = 2
-    line_type = cv2.LINE_AA
+    draw = ImageDraw.Draw(template)
+    image_width, image_height = template.size
 
-    text_size = cv2.getTextSize(user_name, font, font_scale, thickness)[0]
-    text_width, text_height = text_size
+    # Define font and calculate size
+    base_font_size = 36
+    font_size = int(base_font_size * (image_width / 1000))
+    font_path = "static/fonts/arial.ttf"  # Replace with the actual path to your TTF font
+    font = ImageFont.truetype(font_path, font_size)
 
+    # Use font.getbbox() to calculate text size
+    text_bbox = font.getbbox(user_name)
+    text_width, text_height = text_bbox[2] - text_bbox[0], text_bbox[3] - text_bbox[1]
+
+    # Text position and alignment
     text_y_positions = {
         'en': 320,
         'pt': 630,
     }
     text_y = text_y_positions.get(language, 320)
     text_x = (image_width - text_width) // 2
-    cv2.putText(template, user_name, (text_x, text_y), font, font_scale, font_color, thickness, lineType=line_type)
+
+    # Draw the user name on the certificate
+    draw.text((text_x, text_y), user_name, font=font, fill=(0, 0, 0, 255))
+
     return template
 
-def course(request, slug):
-    course = get_object_or_404(Course, slug=slug)
+def course(request):
     if request.method == 'POST':
         user_name = request.POST['user_name']
         language = request.POST['language']
-        template_image = cv2.imread('static/images/template.png')
-        updated_template = update_certificate_template(template_image, user_name, language)
-        ret, buf = cv2.imencode('.png', updated_template)
-        image = ContentFile(buf.tobytes())
-        certificate = Certificate(user_name=user_name)
-        certificate.certificate_image.save(f"{user_name}_{language}.png", image)
-        certificate.save()
-        return redirect('courses:conclusion', id=certificate.id)
-    return render(request, 'courses/course.html', {'course': course})
+        template_path = 'static/images/template.png'
+        updated_template = update_certificate_template(template_path, user_name, language)
 
-def certificate_display(request, id):
-    certificate = Certificate.objects.get(id=id)
-    return render(request, 'courses/certificate.html', {'certificate': certificate})
+        # Save the certificate to the media directory
+        media_dir = os.path.join(settings.MEDIA_ROOT, 'certificates')
+        os.makedirs(media_dir, exist_ok=True)
+        certificate_filename = f"{user_name}_{language}.png"
+        certificate_path = os.path.join(media_dir, certificate_filename)
+        updated_template.save(certificate_path)
 
-def create_course(request):
-    if request.method == "POST":
-        form = CourseForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('courses:index')
-    else:
-        form = CourseForm()
-    return render(request, 'courses/add.html', {'form': form})
+        # Pass the media URL for the certificate to the display page
+        certificate_url = f"{settings.MEDIA_URL}certificates/{certificate_filename}"
+        return render(request, 'courses/certificate.html', {
+            'certificate': {
+                'user_name': user_name,
+                'certificate_image': {'url': certificate_url},
+            }
+        })
+
+    return render(request, 'courses/course.html')
+
+from django.http import FileResponse
+import os
+from django.conf import settings
+
+def certificate_display(request, filename):
+    # Construct the full path to the certificate file
+    certificate_path = os.path.join(settings.MEDIA_ROOT, 'certificates', filename)
+
+    # Check if the file exists
+    if not os.path.exists(certificate_path):
+        return HttpResponse("Certificate not found.", status=404)
+
+    # Serve the certificate as a file response
+    return FileResponse(open(certificate_path, 'rb'), content_type='image/png')

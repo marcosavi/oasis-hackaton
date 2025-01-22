@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container-mobile text-center">
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: 95%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">95%</div>
+  </div>
+    <div class="row">
+      <div class="col-center">
+        <br>
+        <h1 class="h1-fetching">Adjusting the best tools for you  :)</h1>
+        <p>Fetching the data! Just <b><span id="counter">7</span></b> more seconds</p>
+        <div class="spinner-border" role="status">
+            
+          </div>
+        <script>
+            setInterval(function() {
+                var div = document.querySelector("#counter");
+                var count = div.textContent * 1 - 1;
+                div.textContent = count;
+                if (count <= 0) {
+                    window.location.replace("{% url 'edu:dashboard' %}");
+                }
+            }, 1000);
+        </script>        
+        </div>
+        <br>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

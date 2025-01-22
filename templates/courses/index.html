@@ -6,17 +6,13 @@
 {% block content %}
 
 <div class="row cards-courses">
-{% for course in courses %}
 <div class="card" style="width: 18rem; padding: 0;">
-    {% if course.image %}
-    <img src="{{ course.image.url }}" alt="{{ course.title }}" style="height: 180px; border-radius: 5px 5px 0px 0px;">
-    {% endif %}
+    <img src="{% static 'images/translanguaging.png' %}" alt="Linguistic hybridity for Educators" style="height: 180px; border-radius: 5px 5px 0px 0px;">
     <div class="card-body">
-      <h5 class="card-title">{{ course.title }}</h5>
-      <p class="additional-padding-bottom course-paragraph" ><b>description:</b> {{ course.description }}</p>
-      <a href="/courses/{{ course.slug }}/" class="btn btn-sm btn-main"><i class="bi bi-book"></i>access course</a>
+      <h5 class="card-title">30-minute introduction to linguistic hybridity</h5>
+      <p class="additional-padding-bottom course-paragraph" ><b>description: </b>Learn in a very short time period about linguistic hybridity and its significance in education.</p>
+      <a href="{% url 'courses:course' %}" class="btn btn-sm btn-main"><i class="bi bi-book"></i>access course</a>
     </div>
 </div>
-{% endfor %}
 </div>
 {% endblock %}

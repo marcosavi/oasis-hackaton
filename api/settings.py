@@ -137,3 +137,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # settings.py
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'login'
+
+# Media settings
+MEDIA_URL = '/media/'  # URL for accessing media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory where media files are stored

@@ -35,24 +35,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (selectedAnswer === correctAnswer) {
                 correctCount++;
-                feedback.textContent = ' ✔ Correct';
                 feedback.style.color = 'green';
-                question.style.backgroundColor = '#d4edda'; // Green for correct
+                question.style.backgroundColor = '#d4edda';
             } else {
-                feedback.textContent = ' ✘ Incorrect';
                 feedback.style.color = 'red';
-                question.style.backgroundColor = '#f8d7da'; // Red for incorrect
+                question.style.backgroundColor = '#f8d7da';
             }
 
-            // Append feedback to the question
             question.appendChild(feedback);
         });
 
-        // Show or hide the certificate button based on correctness
         if (correctCount === questions.length) {
-            certificateButton.style.display = 'block'; // Show the certificate button
+            certificateButton.style.display = 'block';
         } else {
-            certificateButton.style.display = 'none'; // Ensure the certificate button stays hidden
+            certificateButton.style.display = 'none';
         }
     });
 });

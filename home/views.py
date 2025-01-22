@@ -8,6 +8,9 @@ from django.http import HttpResponseRedirect
 def index(request):
     return render(request, "home/index.html", {})
 
+def donate(request):
+    return render(request, "home/donate.html", {})
+
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("home:index"))

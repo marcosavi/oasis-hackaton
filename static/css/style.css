@@ -3,6 +3,41 @@
     padding: 0;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: white;
+    background-color: #8A1538;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    color: white !important;
+    background-color: #8A1538;
+    border: none;
+}
+
+.btn-primary:hover {
+    color: white !important;
+    background-color: #8a15385f;
+    border: none;
+}
+
+.container-mobile {
+    max-width: 479px;
+    padding: 0;
+    margin: 0 auto;
+    padding: 40px 0px;
+}
+
 :root {
     font-family: Inter, sans-serif;
     font-feature-settings: 'liga' 1, 'calt' 1; 
@@ -59,11 +94,28 @@ html {
     margin-bottom: 10px;
 }
 
-a {
-    color: black;
-} .h3-home {
+.h3-home {
     letter-spacing: -2px;
     font-weight: 700;
+}
+
+.h1-fetching {
+    font-size: 42px;
+    font-weight: 800;
+    font-family: "Inter", sans-serif;
+    letter-spacing: -2.6px;
+    margin: 0;
+}
+
+.spinner-border {
+    --bs-spinner-width: 6rem;
+    --bs-spinner-height: 6rem;
+    --bs-spinner-vertical-align: -0.125em;
+    --bs-spinner-border-width: 0.25em;
+    --bs-spinner-animation-speed: 0.75s;
+    --bs-spinner-animation-name: spinner-border;
+    border: var(--bs-spinner-border-width) solid currentcolor;
+    border-right-color: transparent;
 }
 
 .p-first {
@@ -81,11 +133,6 @@ header {
     display: flex;
     margin: 0 auto;
     border-radius: 10px;
-}
-
-.bi-book::before {
-    content: "\f618";
-    padding-right: 10px;
 }
 
 .beneficio-quick {
@@ -106,6 +153,10 @@ header {
 .button-header {
     display: flex;
     gap: 10px;
+}
+
+.text-align {
+    text-align: center !important;
 }
 
 .h1-home {
@@ -285,10 +336,15 @@ label {
     padding: 50px 0px !important;
 }
 
+.donation-paragraph {
+    padding: 7px 0px 15px 0px;
+    font-size: 1rem;
+}
+
 .container {
     border-radius: 10px;
     padding: 0;
-    max-width: 1200px;
+    /* max-width: 1200px; */
 }
 
 .first-sec-inicial-index {
@@ -312,6 +368,15 @@ label {
     justify-content: center;
     text-align: left;
     gap: 20px;
+}
+
+.col-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 40px;
+    align-items: center;
 }
 
 .central {
