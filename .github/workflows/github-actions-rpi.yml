@@ -10,3 +10,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - run: python -m venv oasis-venv
+      - run: source ./oasis-venv/bin/activate
+      - run: pip install -r requirements.txt
+      - run: python manage.py run 8080
