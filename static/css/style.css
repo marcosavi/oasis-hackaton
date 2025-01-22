@@ -23,6 +23,11 @@ a {
     white-space: nowrap;
 }
 
+.image-tools {
+    border-radius: 5px 5px 0px 0px;
+    max-width: 500px;
+}
+
 .btn-primary {
     color: white !important;
     background-color: #8A1538;
