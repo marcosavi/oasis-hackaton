@@ -16,6 +16,9 @@ def studentsAge(request):
 def tools(request):
     return render(request, "edu/teachers/tools.html", {})
 
+def ptsdCourse(request):
+    return render(request, "edu/teachers/ptsd.html", {})
+
 def fetching(request):
     return render(request, "edu/teachers/fetching.html", {})
 

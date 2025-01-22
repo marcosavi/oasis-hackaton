@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Support students with Post-traumatic stress disorder{% endblock %}
+
+{% block content %}
+<div class="row" style="max-width: 100%; padding-top: 35px;">
+    <div class="col-4" style="width: 15%; margin-left: 20px; margin-right: 0px;">
+      <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
+        <nav class="nav nav-pills flex-column" style="position: fixed;">
+          <a class="nav-link" href="#item-1">Modules Covered</a>
+          <a class="nav-link" href="#item-2">Understanding PTSD</a>
+        </nav>
+      </nav>
+    </div>
+  
+    <div class="col-8">
+
+      <div id="item-1" class="item">
+        <h3>Modules Covered</h3>
+        <p><i class="bi bi-arrow-right"></i>1. Understanding PTSD</p>
+        <p><i class="bi bi-arrow-right"></i>2. Identifying PTSD in Students</p>
+        <p><i class="bi bi-arrow-right"></i>3. Trauma-Informed Classrooms</p>
+        <p><i class="bi bi-arrow-right"></i>4. Communication Skills for Educators</p>
+        <p><i class="bi bi-arrow-right"></i>5. Collaboration</p>
+        <p><i class="bi bi-arrow-right"></i>6. Support Plans</p>
+    </div>
+
+      <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+        <div id="item-2" class="item">
+          <h3>Module 1: Understanding PTSD</h3>
+          <p>Post-Traumatic Stress Disorder (PTSD) is a mentalhealth
+            condition triggered by experiencing or witnessing a traumatic
+            event. In crisis-affected areas, students are frequently exposed
+            to violence, loss, and instability, increasing the risk of developing
+            PTSD. Understanding PTSD is crucial for teachers to provide
+            appropriate support and create a conducive
+            learning environment.</p>
+        </div>
+        <br>
+        <div id="quiz-section" class="item">
+          <h3>🧑‍🎓👩‍🎓 Quiz: Answer and go to the next module</h3>
+          <br>
+          <form id="quiz-form">
+              <div class="quiz-question" data-correct-answer="b">
+                  <p><b>Which of the following is a common symptom of PTSD?</b></p>
+                  <label>
+                      <input type="radio" name="quiz-answer-1" value="a"> Improved concentration
+                  </label><br>
+                  <label>
+                      <input type="radio" name="quiz-answer-1" value="b"> Flashbacks of the traumatic event
+                  </label><br>
+                  <label>
+                      <input type="radio" name="quiz-answer-1" value="c"> Increased appetite
+                  </label>
+                </div>
+              <button type="button" id="quiz-submit" class="btn btn-sm btn-main big" disabled>Submit Quiz</button>
+          </form>
+      </div>
+
+        <form method="post" class="certificate">
+          {% csrf_token %}
+          <br>
+          <h3>Congratulations 🎉</h3>
+          <br>
+          <button type="submit" class="btn btn-sm btn-main big" style="margin-top: 15px;">
+              <i class="bi bi-patch-check"></i> Next module
+          </button>
+      </form>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

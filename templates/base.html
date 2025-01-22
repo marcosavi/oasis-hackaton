@@ -6,7 +6,8 @@
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}" >
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
         <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
-        
+        <script src="{% static '/js/bootstrap.min.js' %}"></script>
+        <script src="{% static '/js/quiz.js' %}"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Oasis</title>
 
@@ -17,9 +18,9 @@
         <header>
               <nav class="navbar navbar-expand-lg bg-body-tertiary center">
                 <a href="{% url 'home:index' %}"><img class="logo" src="{% static 'images/logo.png' %}"/></a>
-                <div class="button-header">
+                <!-- <div class="button-header">
                   <a href="{% url 'edu:index' %}"><button type="button" class="btn btn-sm btn-second">Test our MVP now</button></a>                       
-                </div>
+                </div> -->
               </nav>
           </header>
         <main>
