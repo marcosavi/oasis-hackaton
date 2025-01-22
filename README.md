@@ -1,4 +1,4 @@
-ED#14 Oasis - Oaizs.com & OasisConnect
+# ED#14 Oasis - Oaizs.com & OasisConnect
 
 Oasis provides training and resources to current and future teachers in underserved regions for quality education. The Web-App, www.oaizs.com, is primarily developed using Django, a Python framework. Additionally, for accepting future donations, we used Stripe.
 
