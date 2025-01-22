@@ -5,13 +5,11 @@ from django.conf import settings
 from home import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('home.urls')),
+    path('admin/', admin.site.urls),
     path('edu/', include('edu.urls')),
-    path('blog/', include('blog.urls')),
     path('login/', views.login.as_view(), name = "login"),
     path('logout/', views.logout_view, name="logout"),
-    path('courses/', include('courses.urls')),
 ]
 
 if settings.DEBUG:
