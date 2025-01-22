@@ -2,16 +2,56 @@
 {% load static %}
 {% block content %}
 
+<div>
+  <h1 class="h1-home">🌴 Welcome to Oasis</h1>
+</div>
+
 <div class="container-mobile text-center">
-  <div class="progress">
-    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-  </div>
-    <div class="row">
-      <div class="col">
-        <br>
-        <h1 class="h1-home">This will be the future dashboard!</h1>
-      </div>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#">Active</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+  </ul>
+  
    
+
+      <div class="row">
+      <div class="col">
+        <div class="card">
+          <img src="{% static 'images/translanguaging.png' %}" alt="Linguistic hybridity for Educators" style="height: 180px; border-radius: 5px 5px 0px 0px;">
+          <div class="card-body">
+            <h5 class="card-title">Teaching students how to read and write</h5>
+            <p class="additional-padding-bottom course-paragraph" ><b>description: </b>Learn in a very short time period about linguistic hybridity and its significance in education.</p>
+            <a href="{% url 'courses:course' %}" class="btn btn-sm btn-main"><i class="bi bi-book"></i>access course</a>
+          </div>
+      </div>
+
+      <div class="card">
+        <img src="{% static 'images/translanguaging.png' %}" alt="Linguistic hybridity for Educators" style="height: 180px; border-radius: 5px 5px 0px 0px;">
+        <div class="card-body">
+          <h5 class="card-title">How to support students with Post-traumatic stress disorder</h5>
+          <p class="additional-padding-bottom course-paragraph" ><b>description: </b>Learn in a very short time period about linguistic hybridity and its significance in education.</p>
+          <a href="{% url 'courses:course' %}" class="btn btn-sm btn-main"><i class="bi bi-book"></i>access course</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="{% static 'images/translanguaging.png' %}" alt="Linguistic hybridity for Educators" style="height: 180px; border-radius: 5px 5px 0px 0px;">
+        <div class="card-body">
+          <h5 class="card-title">Learn how to use Oasis' AI tools</h5>
+          <p class="additional-padding-bottom course-paragraph" ><b>description: </b>Learn in a very short time period about linguistic hybridity and its significance in education.</p>
+          <a href="{% url 'courses:course' %}" class="btn btn-sm btn-main"><i class="bi bi-book"></i>access course</a>
+        </div>
+      </div>
+        
+      </div>
+    </div>
     </div>
 </div>
 

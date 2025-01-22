@@ -8,6 +8,10 @@ a {
     color: white;
 }
 
+.link {
+    color: #8A1538;
+}
+
 .progress-bar {
     display: flex;
     flex-direction: column;
@@ -81,18 +85,6 @@ html {
     padding-top: 20px;
 }
 
-.card-footer {
-    padding: 0;
-    color: none;
-    background-color: none;
-    border-top: none;
-}
-
-.image-banner-ai {
-    max-width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
 
 .h3-home {
     letter-spacing: -2px;
