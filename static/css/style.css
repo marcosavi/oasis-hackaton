@@ -12,8 +12,6 @@
     src: url('/static/fonts/Inter/extrabold.ttf') format('truetype');
 }
 
-
-
 body {
     font-family: 'interNormal', sans-serif;
 }
@@ -37,10 +35,6 @@ a {
     text-align: center;
     white-space: nowrap;
 }
-
-
-  
-
 
 .image-tools {
     border-radius: 5px 5px 0px 0px;
@@ -134,18 +128,6 @@ header {
     border-radius: 10px;
 }
 
-.beneficio-quick {
-    align-items: center;
-    flex-direction: row !important;
-}
-
-.beneficios-quick {
-    background-color: #34B7F1;
-    padding: 20px 0px !important;
-    color: #fff;
-}
-
-
 .button-header {
     display: flex;
     gap: 10px;
@@ -155,7 +137,7 @@ header {
     text-align: center !important;
 }
 
-h1, .h1-fetching, .h1-home, .h1-autoescola-page {
+h1, .h1-fetching, .h1-home {
     font-weight: 800;
     letter-spacing: -2.6px;
     margin: 0;
@@ -193,11 +175,6 @@ figcaption {
     font-size: 20px;
     padding-bottom: 25px;
     text-align: justify;
-}
-
-.text-body-secondary {
-    --bs-text-opacity: 1;
-    color: black !important;
 }
 
 .nav-link {
@@ -247,16 +224,6 @@ figcaption {
     margin: 0;
     list-style: none;
     gap: 20px;
-}
-
-.align-form-center {
-    display: flex;
-    gap: 10px;
-    padding-bottom: 20px;
-}
-
-.senha-alert {
-    font-size: 16px;;
 }
 
 
@@ -312,10 +279,6 @@ label {
     color: white;
 }
 
-.first-section-inicial {
-    padding: 50px 0px !important;
-}
-
 .donation-paragraph {
     padding: 7px 0px 15px 0px;
     font-size: 1rem;
@@ -357,19 +320,6 @@ label {
     text-align: center;
     gap: 40px;
     align-items: center;
-}
-
-.central {
-    margin: 0 10px;
-}
-
-.beneficios {
-    margin-top: 20px;
-    gap: 20px;
-}
-
-.beneficio {
-    margin-bottom: 10px;
 }
 
 .list-group, .list-group-item {
@@ -444,6 +394,79 @@ label {
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #128c7e;
+    background-color: #dcf8c6;
+}
+
+.faq {
+    margin-top: 60px;
+    padding: 0;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0rem;
+}
+
+.accordion-body {
+    padding: var(--bs-accordion-body-padding-y) var(--bs-accordion-body-padding-x);
+    text-align: left;
+}
+
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-size: inherit;
+    line-height: inherit;
+    border-collapse: collapse;
+    padding: 0;
+} 
+
+ol, ul {
+    padding-left: 1.5rem;
+}
+
+.form-add-product {
+    margin: 40px auto 0 auto;
+    padding: 40px 70px;
+    border: 1px solid #dee2e6!important;
+    border-radius: 10px;
+    max-width: 700px;
+}
+
+.text-muted {
+    color: #6c757d; 
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+}
+
+.inline-cadastro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 30px 0px 20px 0px;
+}
+
+.fieldWrapper {
+    margin-bottom: 10px;
+    gap: 10px;
+    display: flex;
+}
+
+input, .fieldWrapper input, select {
+    border-radius: 10px;
+    border: 1px solid #D6D7DB;
+    height: 30px;
+}
+
+.quiz-question {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 
@@ -560,38 +583,6 @@ label {
         max-width: 250px;
         margin-bottom: 20px;
     }
-    
-}
-
-
-@media (min-width: 768px) {
-    .row-cols-md-3>* {
-        flex: 0 0 auto;
-        width: 33.333%;
-        /* padding: 0; */
-    } .margin-benefits {
-        margin: 0 -20px;
-    }
-}
-
-.accordion-button:not(.collapsed) {
-    color: #128c7e;
-    background-color: #dcf8c6;
-}
-
-.faq {
-    margin-top: 60px;
-    padding: 0;
-}
-
-p {
-    margin-top: 0;
-    margin-bottom: 0rem;
-}
-
-.accordion-body {
-    padding: var(--bs-accordion-body-padding-y) var(--bs-accordion-body-padding-x);
-    text-align: left;
 }
 
 @media (min-width: 576px) {
@@ -599,57 +590,4 @@ p {
         flex: 0 0 auto;
         width: auto;
     }
-}
-
-button, input, optgroup, select, textarea {
-    margin: 0;
-    font-size: inherit;
-    line-height: inherit;
-    border-collapse: collapse;
-    padding: 0;
-} 
-
-ol, ul {
-    padding-left: 1.5rem;
-}
-
-.form-add-product {
-    margin: 40px auto 0 auto;
-    padding: 40px 70px;
-    border: 1px solid #dee2e6!important;
-    border-radius: 10px;
-    max-width: 700px;
-}
-
-.text-muted {
-    color: #6c757d; 
-    display: block;
-    margin-top: 0.25rem;
-    font-size: 0.875em;
-}
-
-.inline-cadastro {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    margin: 30px 0px 20px 0px;
-}
-
-.fieldWrapper {
-    margin-bottom: 10px;
-    gap: 10px;
-    display: flex;
-}
-
-input, .fieldWrapper input, select {
-    border-radius: 10px;
-    border: 1px solid #D6D7DB;
-    height: 30px;
-}
-
-.quiz-question {
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 10px;
 }
