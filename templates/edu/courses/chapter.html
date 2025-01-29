@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ chapter.chapter_title }}{% endblock %}
+
+{% block content %}
+<div class="row" style="max-width: 100%; padding-top: 35px;">
+    <!-- Sidebar Navigation -->
+    <div class="col-4" style="width: 15%; margin-left: 20px; margin-right: 0px;">
+        <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
+            <nav class="nav nav-pills flex-column" style="position: fixed;">
+                <a class="nav-link" href="#item-1">Modules Covered</a>
+                <a class="nav-link" href="#item-2">{{ chapter.chapter_title }}</a>
+                {% if chapter.quiz %}
+                    <a class="nav-link" href="#quiz-section">Quiz Module</a>
+                {% endif %}
+            </nav>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-8">
+        <!-- Modules Covered -->
+        <div id="item-1" class="item">
+            <h3>Modules Covered</h3>
+            {% for module in modules %}
+                <p><i class="bi bi-arrow-right"></i> {{ module }}</p>
+            {% empty %}
+                <p>No modules listed for this chapter.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Chapter Content -->
+        <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+            <div id="item-2" class="item">
+                <h3>{{ chapter.chapter_title }}</h3>
+                <p>{{ chapter.content }}</p>
+            </div>
+            <br>
+
+            <!-- Quiz Section (Only if a quiz exists) -->
+            {% if chapter.quiz %}
+                <div id="quiz-section" class="item">
+                    <h3>🧑‍🎓👩‍🎓 Quiz: Answer and go to the next module</h3>
+                    <br>
+                    <form id="quiz-form">
+                        {% for question in chapter.quiz.questions.all %}
+                            <div class="quiz-question" data-correct-answer="{{ question.correct_alternative.id }}">
+                                <p><b>{{ question.text }}</b></p>
+                                {% for alternative in question.alternatives.all %}
+                                    <label>
+                                        <input type="radio" name="quiz-answer-{{ question.id }}" value="{{ alternative.id }}"> {{ alternative.text }}
+                                    </label><br>
+                                {% endfor %}
+                            </div>
+                            <br>
+                        {% endfor %}
+                        <button type="button" id="quiz-submit" class="btn btn-sm btn-main big" disabled>Submit Quiz</button>
+                    </form>
+                </div>
+            {% endif %}
+
+            <!-- Next Module Button -->
+            <form method="post" class="certificate">
+                {% csrf_token %}
+                <br>
+                <h3>Congratulations 🎉</h3>
+                <br>
+                <button type="submit" class="btn btn-sm btn-main big" style="margin-top: 15px;">
+                    <i class="bi bi-patch-check"></i> Next module
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

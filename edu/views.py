@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
+from .models import Course, Chapter, Quiz, Question, Alternative
 
 # Create your views here.
 def index(request):
@@ -16,9 +18,6 @@ def studentsAge(request):
 def tools(request):
     return render(request, "edu/teachers/tools.html", {})
 
-def ptsdCourse(request):
-    return render(request, "edu/teachers/ptsd.html", {})
-
 def fetching(request):
     return render(request, "edu/teachers/fetching.html", {})
 
@@ -28,3 +27,16 @@ def dashboard(request):
 def futureTeachers(request):
     return render(request, "edu/future-teachers/future-teachers.html", {})
 
+def courseDetail(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    chapters = course.chapters.all()
+    chapters_with_quiz = [chapter for chapter in chapters if hasattr(chapter, 'quiz')]
+    return render(request, "edu/courses/course.html", {
+        "course": course,
+        "chapters": chapters,
+        "chapters_with_quiz": chapters_with_quiz,
+    })
+
+def chapterDetail(request, course_id, chapter_id):
+    chapter = get_object_or_404(Chapter, id=chapter_id, course_id=course_id)
+    return render(request, "edu/courses/chapter.html", {"chapter": chapter})

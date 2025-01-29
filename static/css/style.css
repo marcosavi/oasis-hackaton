@@ -6,11 +6,16 @@
 @font-face {
     font-family: 'interNormal';
     src: url('/static/fonts/Inter/inter.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 @font-face {
     font-family: 'interExtraBold';
     src: url('/static/fonts/Inter/extrabold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
+
 
 body {
     font-family: 'interNormal', sans-serif;
@@ -327,8 +332,7 @@ label {
 }
 
 .gray {
-    background-color: #8A1538
-    ;
+    background-color: #8A1538;
     border-radius: 10px;
 }
 
@@ -497,9 +501,6 @@ input, .fieldWrapper input, select {
     } .row {
         display: flex;
         flex-direction: column;
-    } .gray {
-        border-radius: 0;
-        background-color: white;
     } .h3-home {
         padding: 8px 0px 0px 0px;
     } .list-group-item {

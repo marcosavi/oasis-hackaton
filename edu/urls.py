@@ -4,12 +4,14 @@ from . import views
 app_name = "edu"
 
 urlpatterns = [
-    path("", views.index, name = "index"),
-    path("teacher/1/", views.classSize, name = "class-size"),
-    path("teacher/2/", views.studentsAge, name = "students-age"),
-    path("teacher/3/", views.tools, name = "tools"),
-    path("teacher/4/", views.fetching, name = "fetching"),
-    path("teacher/ptsd-course/", views.ptsdCourse, name = "ptsd"),
-    path("teacher/dashboard/", views.dashboard, name = "dashboard"),
-    path("future-teachers/", views.futureTeachers, name = "future-teachers"),
+    path("", views.index, name="index"),
+    path("teachers/", views.teachers, name="teachers"),
+    path("teachers/class-size/", views.classSize, name="class-size"),
+    path("teachers/students-age/", views.studentsAge, name="students-age"),
+    path("teachers/tools/", views.tools, name="tools"),
+    path("teachers/fetching/", views.fetching, name="fetching"),
+    path("teachers/dashboard/", views.dashboard, name="dashboard"),
+    path("future-teachers/", views.futureTeachers, name="future-teachers"),
+    path("courses/<int:course_id>/", views.courseDetail, name="course_detail"),
+    path("courses/<int:course_id>/<int:chapter_id>/", views.chapterDetail, name="chapter_detail"),
 ]
