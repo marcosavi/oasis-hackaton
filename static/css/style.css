@@ -473,6 +473,10 @@ input, .fieldWrapper input, select {
     margin-bottom: 10px;
 }
 
+.video {
+    max-width: 100%;
+}
+
 
 @media (min-width: 992px) {
     .navbar-expand-lg .navbar-nav {
@@ -492,6 +496,9 @@ input, .fieldWrapper input, select {
         max-width: 100%;
         border-radius: 20px !important;
         padding-bottom: 10px;
+    } .gray {
+        margin-top: 10px;
+        border-radius: 0;
     }
     .image-header {
         max-width: 100%;
@@ -575,6 +582,7 @@ input, .fieldWrapper input, select {
     }
     .list-group, .list-group-item {
         color: #212529;
+        background-color: transparent;
     }
     .list-group-item {
         font-size: 20px;
