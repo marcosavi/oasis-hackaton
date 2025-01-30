@@ -12,9 +12,8 @@ jobs:
       - uses: actions/checkout@v3
 
       - run: |
-          
+          # stop anything running on port 8080
           sudo fuser -k 8080/tcp || true
-          cd /home/belix/actions-runner/_worker/oasis-hackathon/oasis-hackathon
 
           # Set up virtual environment
           python -m venv venv
