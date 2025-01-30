@@ -42,7 +42,7 @@ a {
 }
 
 .image-tools {
-    border-radius: 5px 5px 0px 0px;
+    border-radius: 5px;
     max-width: 500px;
 }
 
@@ -57,11 +57,8 @@ a {
 
 
 .parent-div {
-    max-width: 1200px;
     gap: 50px;
     margin: 0 auto;
-    display: flex;
-    justify-content: center;
 }
 
 .container-mobile {
@@ -210,6 +207,10 @@ figcaption {
     gap: 60px;
     justify-content: center;
     padding: 60px;
+}
+
+.card {
+    padding: 20px;
 }
 
 .container .h1-home {

@@ -21,15 +21,16 @@ def tools(request):
 def fetching(request):
     return render(request, "edu/teachers/fetching.html", {})
 
-def dashboard(request):
-    return render(request, "edu/teachers/dashboard.html", {})
-
 def futureTeachers(request):
     return render(request, "edu/future-teachers/future-teachers.html", {})
 
+def dashboard(request):
+    courses = Course.objects.all()
+    return render(request, "edu/teachers/dashboard.html", {"courses": courses })
+
 def courseDetail(request, course_id):
     course = get_object_or_404(Course, id=course_id)
-    chapters = course.chapters.all()
+    chapters = Chapter.objects.filter(course=course)
     chapters_with_quiz = [chapter for chapter in chapters if hasattr(chapter, 'quiz')]
     return render(request, "edu/courses/course.html", {
         "course": course,
@@ -39,4 +40,7 @@ def courseDetail(request, course_id):
 
 def chapterDetail(request, course_id, chapter_id):
     chapter = get_object_or_404(Chapter, id=chapter_id, course_id=course_id)
-    return render(request, "edu/courses/chapter.html", {"chapter": chapter})
+    quizes = Quiz.objects.all()
+    questions = Question.objects.all()
+    alternatives = Alternative.objects.all()
+    return render(request, "edu/courses/chapter.html", {"chapter": chapter, "quizes":quizes, "questions":questions, "alternatives":alternatives})

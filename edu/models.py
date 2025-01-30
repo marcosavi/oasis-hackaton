@@ -1,9 +1,10 @@
 from django.db import models
-from django.utils.text import slugify
+from django.core.files.storage import FileSystemStorage 
 
 # Create your models here.
 
 class Course(models.Model):
+    image = models.ImageField(storage=FileSystemStorage, blank = True)
     title = models.CharField("Course  title", max_length=50, blank = False, null = False)
     description = models.CharField("Course description", max_length = 200, blank = False, null = False)
     def __str__(self):

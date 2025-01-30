@@ -10,8 +10,8 @@ urlpatterns = [
     path("teachers/students-age/", views.studentsAge, name="students-age"),
     path("teachers/tools/", views.tools, name="tools"),
     path("teachers/fetching/", views.fetching, name="fetching"),
-    path("teachers/dashboard/", views.dashboard, name="dashboard"),
+    path("dashboard/", views.dashboard, name="dashboard"),
     path("future-teachers/", views.futureTeachers, name="future-teachers"),
-    path("courses/<int:course_id>/", views.courseDetail, name="course_detail"),
-    path("courses/<int:course_id>/<int:chapter_id>/", views.chapterDetail, name="chapter_detail"),
+    path("courses/course-<int:course_id>/", views.courseDetail, name="course_detail"),
+    path("courses/course-<int:course_id>/chapter-<int:chapter_id>/", views.chapterDetail, name="chapter_detail"),
 ]
