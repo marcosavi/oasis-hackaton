@@ -6,3 +6,5 @@ pillow==11.0.0
 requests==2.32.3
 gunicorn==23.0.0
 #dj-database-url==2.3.0
+
+ollama~=0.4.7

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oasis Chat</title>
+</head>
+<body>
+    <h1>Chat with Ollama</h1>
+    <input type="text" id="prompt" placeholder="">
+    <button onclick="sendMessage()">Send</button>
+    <div id="response"></div>
+    <div>
+        <h2>Translate</h2>
+        <div>
+            <input type="text" id="translate" placeholder="Text to translate">
+            <select id="language">
+                <option value="English">
+                    English
+                </option>
+                <option value="Spanish">
+                    Spanish
+                </option>
+                <option value="French">
+                    French
+                </option>
+                <option value="German">
+                    German
+                </option>
+                <option value="Italian">
+                    Italian
+                </option>
+                <option value="Portuguese">
+                    Portuguese
+                </option>
+                <option value="Arabic">
+                    Arabic
+                </option>
+            </select>
+            <button onclick="translateText()">Translate</button>
+        </div>
+        <p id="translation"></p>
+    </div>
+    <script>
+        function sendMessage() {
+            const prompt = document.getElementById("prompt").value;
+            const responseDiv = document.getElementById("response");
+            responseDiv.innerHTML = "";
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/oasis-ai/chat/", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onprogress = function() {
+                responseDiv.innerHTML = xhr.responseText;
+            };
+
+            xhr.send("prompt=" + encodeURIComponent(prompt));
+        }
+        
+        function translateText() {
+            const text = document.getElementById("translate").value;
+            const language = document.getElementById("language").value;
+            const translationDiv = document.getElementById("translation");
+            translationDiv.innerHTML = "";
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/oasis-ai/translate/", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onprogress = function() {
+                translationDiv.innerHTML = xhr.responseText;
+            };
+
+            xhr.send("text=" + encodeURIComponent(text) + "&language=" + encodeURIComponent(language));
+        }
+    </script>
+</body>
+</html>

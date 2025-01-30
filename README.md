@@ -27,9 +27,3 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 ```
-
-## Contributors
-
-<a href="https://github.com/marcosavi/oasis-hackaton/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=marcosavi/oasis-hackaton" />
-</a>
