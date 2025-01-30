@@ -1,15 +1,18 @@
 from django.contrib.messages.context_processors import messages
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from django.http import StreamingHttpResponse
 import ollama
 
 
 # Create your views here.
+
+@login_required
 def index(request):
     return render(request, "oasis-ai/index.html", {})
 
-
+@login_required
 def chat(request):
     return render(request, "oasis-ai/chat.html")
 

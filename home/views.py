@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
@@ -21,6 +21,5 @@ class login(LoginView):
     def get_success_url(self):
         user = self.request.user
         if user.is_authenticated:
-            return reverse_lazy('courses:index')
-        return reverse_lazy('inicial:index')
-
+            return reverse_lazy('edu:index')
+        return reverse_lazy('home:index')

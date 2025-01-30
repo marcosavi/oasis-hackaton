@@ -123,6 +123,18 @@ header {
     border-bottom: 1px solid #D6D7DB;
 }
 
+.btn-main-ai {
+    border-radius: 10px;
+    padding: 2px 10px;
+    border: none;
+    background-color: #8A1538;
+    color: white;
+}
+
+.div-ai {
+    padding-bottom: 20px;
+}
+
 .logo {
     max-width: 200px;
     display: flex;
@@ -133,6 +145,7 @@ header {
 .button-header {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .text-align {
@@ -259,6 +272,7 @@ label {
 
 .btn-whatsapp {
     color: #8A1538;
+    border: solid 2px #8A1538;
     background-color: #ffffff;
 }
 
@@ -427,10 +441,13 @@ button, input, optgroup, select, textarea {
     line-height: inherit;
     border-collapse: collapse;
     padding: 0;
-} 
+}
 
-ol, ul {
-    padding-left: 1.5rem;
+dl, ol, ul {
+    margin-top: 0;
+    padding: 0;
+    display: grid;
+    height: auto;
 }
 
 .form-add-product {
@@ -465,7 +482,7 @@ ol, ul {
 input, .fieldWrapper input, select {
     border-radius: 10px;
     border: 1px solid #D6D7DB;
-    height: 30px;
+    height: auto;
 }
 
 .quiz-question {
@@ -485,13 +502,7 @@ input, .fieldWrapper input, select {
     }
 }
 @media (max-width: 900px) {
-    header {
-        border-bottom: 1px solid #D6D7DB;
-        padding: 0 20px;
-        justify-content: none;
-        display: block;
-        border-bottom: 1px solid #D6D7DB;
-    } .mobile-image {
+    .mobile-image {
         max-width: 100% !important;
     } .image-platform {
         max-width: 100%;

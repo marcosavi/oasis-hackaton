@@ -1,5 +1,6 @@
 from django.db import models
-from django.core.files.storage import FileSystemStorage 
+from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -14,6 +15,7 @@ class Chapter(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='chapters')
     title = models.CharField("Chapter  title", max_length=50, blank = False, null = False)
     content = models.TextField()
+    video = models.FileField(upload_to='videos/', blank=True)
     order = models.PositiveIntegerField()
     class Meta:
         ordering = ['order']
