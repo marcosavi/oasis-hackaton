@@ -10,9 +10,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - run: |
+          # stop anything running on port 8080
+          sudo fuser -k 8080/tcp || true
+
+          # Set up virtual environment
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
           python manage.py collectstatic --noinput
-          python manage.py migrate
+
+          # Restart the systemd service to persist Django
+          sudo systemctl restart oasis
+          
+          # Show service status (for debugging)
+          sudo systemctl status oasis --no-pager

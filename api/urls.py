@@ -10,6 +10,7 @@ urlpatterns = [
     path('edu/', include('edu.urls')),
     path('login/', views.login.as_view(), name = "login"),
     path('logout/', views.logout_view, name="logout"),
+    path('oasis-ai/', include('oasis-ai.urls')),
 ]
 
 if settings.DEBUG:
