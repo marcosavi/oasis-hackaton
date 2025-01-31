@@ -61,25 +61,45 @@ a {
     margin: 0 auto;
 }
 
+.dashboard {
+    gap: 20px;
+}
+
 .courses {
+    justify-content: center;
+    align-items: center;
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     border-collapse: collapse;
+    padding-bottom: 20px;
+}
+
+.course {
+    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .nav {
     border-collapse: collapse;
 }
 .container-mobile {
-    max-width: 900px;
+    max-width: 820px;
     padding: 0 ;
     margin: 0 auto;
-    padding: 40px 0px 0px 0px;
+    padding: 40px 0;
 }
 
 .additional-padding-bottom {
-    padding-bottom: 13px;
+    padding-bottom: 12px;
     font-size: 1.875rem;
+}
+
+.chapters {
+    margin: 10px auto 25px auto;
+    text-align: left;
+    gap: 5px;
 }
 
 .qualidade-box {
@@ -154,7 +174,8 @@ header {
 .div-ai {
     position: absolute;
     bottom: 0%;
-    width: 100%;
+    width: 90%;
+    margin: 0 calc(5% / 2);
 }
 
 .div-ai-container {
@@ -164,8 +185,8 @@ header {
 }
 
 .div-ai #prompt {
-    min-height: 70px;
-    background-color: rgb(253, 253, 253);
+    min-height: 100px;
+    background-color: #8a153806;
     padding: 15px;
     border-radius: 15px;
     border: 1px solid rgba(128, 128, 128, 0.11);
@@ -297,10 +318,16 @@ figcaption {
 
 .card {
     padding: 20px;
+    max-width: 500px;
 }
 
+/*
 .container .h1-home {
     max-width: 500px;
+} */
+
+.card-title {
+    font-weight: bold;
 }
 
 .video-instrucao {
@@ -446,10 +473,29 @@ label {
     padding-left: 0;
 }
 
+.login-h3 {
+    font-weight: bold;
+    text-align: left;
+}
+
+.future-teachers {
+    border-radius: 10px;
+    color: #ffffff91;
+    font-size: 12px;
+    padding: 4px 0;
+    background-color: #2A7F62;
+    text-align: center;
+    margin-bottom: 10px;
+    max-width: 10vw;
+}
+
+.p-first {
+    font-size: 22px;
+}
 
 .bio {
-    max-width: 800px;
     padding-top: 50px;
+    max-width: 800px;
     display: flex;
 }
 

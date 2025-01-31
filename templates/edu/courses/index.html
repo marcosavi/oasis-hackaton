@@ -21,7 +21,7 @@
                             <img class="image-tools" src="{{ course.image.url|safe }}">
                             <div class="card-body">
                                 <p class="future-teachers">future teachers friendly</p>
-                                <h5 class="card-title">{{ course.title }} This is a course for future teachers</h5>
+                                <h5 class="card-title">{{ course.title }}</h5>
                                 <p class="additional-padding-bottom course-paragraph">{{ course.description }}</p>
                                 <a href="{% url 'edu:course_detail' course.id %}" class="btn btn-sm btn-main"><i class="bi bi-book"></i> Access Course</a>
                             </div>

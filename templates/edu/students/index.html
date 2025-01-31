@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Resources for students{% endblock %}
+
+{% load static %}
+{% block content %}
+
+<div class="container-mobile text-center">
+  <h1 class="h1-home">Hello, {{ request.user.first_name }}</h1>
+  <p class="p-first additional-padding-bottom">Explore many educational resources for you</p>
+</div>
+
+<article class="dashboard">
+    <div class="courses" id="courses"> 
+        <div class="text-center course">
+                {% for resource in resources %}
+                    {% if course.future_teachers %}
+                    <div class="col">
+                        
+                        <div class="card">
+                            <img class="image-tools" src="{{ resource.image.url|safe }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ resource.title }}</h5>
+                                <p class="additional-padding-bottom course-paragraph">{{ course.description }}</p>
+                                <a href="#" class="btn btn-sm btn-main"> Access file</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+        </div>
+    </div>
+</article>
+
+{% endblock %}

@@ -53,3 +53,9 @@ class StudentProfile(models.Model):
         self.save()
     def __str__(self):
         return f"{self.student.first_name} {self.student.last_name} - Last attended: {self.last_attended if self.last_attended else 'Never'}"
+    
+class Resources(models.Model):
+    image = models.ImageField(storage=FileSystemStorage, blank = True)
+    title = models.CharField(max_length=50, blank = False, null = False)
+    description = models.TextField()
+    file = models.FileField(upload_to='files/')

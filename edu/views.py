@@ -1,10 +1,9 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
-from .models import Course, Chapter, StudentProfile
+from .models import Course, Chapter, StudentProfile, Resources
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
-from django.contrib.auth.forms import UserCreationForm  
 from django.utils import timezone
 from django.contrib import messages
 
@@ -84,6 +83,11 @@ def fetching(request):
 @login_required
 def futureTeachers(request):
     return render(request, "edu/future-teachers/future-teachers.html", {})
+
+@login_required
+def students(request):
+    resources = Resources.objects.all() 
+    return render(request, "edu/students/index.html", {"resources":resources})
 
 @login_required
 def dashboard(request):
