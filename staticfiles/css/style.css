@@ -79,6 +79,7 @@ a {
 
 .additional-padding-bottom {
     padding-bottom: 13px;
+    font-size: 1.875rem;
 }
 
 .qualidade-box {
@@ -129,17 +130,83 @@ header {
     border-bottom: 1px solid #D6D7DB;
 }
 
-.btn-main-ai {
-    border-radius: 10px;
-    padding: 2px 10px;
-    border: none;
+.oasis-chat {
+    position: relative;
+    height: 78vh;
+}
+
+#chat-response {
+    padding: 15px;
+    height: 58vh;
+    overflow: auto;
+    text-align: left;
+}
+
+#chat-response::-webkit-scrollbar {
+    width: 2px;
+}
+
+#chat-response::-webkit-scrollbar-thumb {
     background-color: #8A1538;
-    color: white;
+    border-radius: 10px;
 }
 
 .div-ai {
-    padding-bottom: 20px;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
 }
+
+.div-ai-container {
+    display: grid;
+    gap: 20px;
+    position: relative;
+}
+
+.div-ai #prompt {
+    min-height: 70px;
+    background-color: rgb(253, 253, 253);
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid rgba(128, 128, 128, 0.11);
+    box-shadow: 4px 4px 10px rgba(138, 21, 56, 0.11);
+    padding-right: 50px;
+    z-index: 10;
+}
+
+.div-ai #prompt:focus {
+    outline: none;
+    border: solid 2px rgba(138, 21, 56, 0.69);
+}
+
+.div-ai-container .btn-main-ai {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: #8A1538;
+    color: white;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    z-index: 10;
+}
+
+
+.loader {
+  width: 50px;
+  --b: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 1px;
+  background: conic-gradient(#0000 10%,#f03355) content-box;
+  -webkit-mask: repeating-conic-gradient(#0000 0deg,#000 1deg 20deg,#0000 21deg 36deg),
+    radial-gradient(farthest-side,#0000 calc(100% - var(--b) - 1px),#000 calc(100% - var(--b)));
+  -webkit-mask-composite: destination-in;
+          mask-composite: intersect;
+  animation:l4 1s infinite steps(10);
+}
+@keyframes l4 {to{transform: rotate(1turn)}}
 
 .logo {
     max-width: 200px;

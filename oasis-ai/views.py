@@ -22,7 +22,7 @@ def ollama_chat(request):
         prompt = request.POST.get("prompt", "")
         print(prompt)
         def stream():
-            for response in ollama.chat(model="deepseek-r1:1.5b",
+            for response in ollama.chat(model="qwen2.5:0.5b",
                                         messages=[{"role": "user",
                                                    "content": prompt}],
                                         stream=True):
