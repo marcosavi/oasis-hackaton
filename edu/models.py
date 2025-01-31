@@ -1,13 +1,14 @@
 from django.db import models
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
-import datetime
+from django.utils import timezone
 
 # Create your models here.
 
 class Course(models.Model):
     image = models.ImageField(storage=FileSystemStorage, blank = True)
     title = models.CharField("Course  title", max_length=50, blank = False, null = False)
+    future_teachers = models.BooleanField(default=False, blank=True)
     description = models.CharField("Course description", max_length = 200, blank = False, null = False)
     def __str__(self):
         return f"Course {self.id} - {self.title}"
@@ -44,12 +45,11 @@ class Alternative(models.Model):
     
 class StudentProfile(models.Model):
     student = models.OneToOneField(User, on_delete=models.CASCADE, related_name="student_profile")
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="created_students", blank=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="created_students", blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    age = models.IntegerField()
+    last_attended = models.DateField(blank=True, null=True)
     def mark_attendance(self):
-        self.created_at = datetime.datetime.now()
+        self.last_attended = timezone.now().date()
         self.save()
-
     def __str__(self):
-        return f"{self.student.first_name} {self.student.last_name} - Last attended: {self.created_at}"
+        return f"{self.student.first_name} {self.student.last_name} - Last attended: {self.last_attended if self.last_attended else 'Never'}"

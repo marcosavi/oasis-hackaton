@@ -3,20 +3,29 @@
 {% block content %}
 
 <div class="container-mobile text-center">
-  <h1 class="h1-home">🌴 Welcome to Oasis</h1>
-  <p class="p-first additional-padding-bottom">We have found the best courses for you!</p>
+  <h1 class="h1-home">🌴 Hello, {{ request.user.first_name }}! Welcome to Oasis</h1>
+  <p class="p-first additional-padding-bottom">We have found the best resources for you!</p>
 </div>
 
-<div class="parent-div">
-    <div class="container-mobile text-center">
+<article class="dashboard">
+
+    <div class="courses" style="padding-bottom: 25px">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Selected Courses</a>
+                <a class="nav-link active" aria-current="page" href="#courses">Courses based on your preferences</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#ai-tools">AI tools</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#attendance-tracker">Attendance tracker</a>
             </li>
         </ul>
+    </div>
 
+<div class="courses" id="courses"> 
+    <div class="text-center course">
         {% if courses %}
-            <div class="courses">
             {% for course in courses %}
             <div class="col">
                 <div class="card">
@@ -28,55 +37,96 @@
                     </div>
                 </div>
             </div>
-            {% endfor %}
+        {% endfor %}
             
         {% else %}
             <p>No courses selected yet.</p>
         {% endif %}
     </div>
+</div>
+
+<div class="courses" id="ai-tools"> 
+    <div class="text-center course">
+            <div class="col">
+                <div class="card">
+                    <img class="image-tools" src="{% static 'images/oasisconnect.webp' %}">
+                    <div class="card-body">
+                        <h5 class="card-title">Ask to our AI chatboot any educational question</h5>
+                        <p class="additional-padding-bottom course-paragraph">Use OasisConnect's translation feature to help your multi-lingual classroom.</p>
+                        <a href="{% url 'oasis-chat:ollama_chat' %}" class="btn btn-sm btn-main"><i class="bi bi-book"></i> Access Course</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card">
+                    <img class="image-tools" src="{% static 'images/oasisconnect.webp' %}">
+                    <div class="card-body">
+                        <h5 class="card-title">Translate lessons to other languages</h5>
+                        <p class="additional-padding-bottom course-paragraph">Use OasisConnect's translation feature to help your multi-lingual classroom.</p>
+                        <a href="{% url 'oasis-chat:ollama_translate' %}" class="btn btn-sm btn-main"><i class="bi bi-book"></i> Access platform</a>
+                    </div>
+                </div>
+            </div>
     </div>
+</div>
 
-
-
+<div class="parent-div" id="attendance-tracker">
     <div class="container-mobile text-center">
+        <h3 class="login-h3">Student Attendance</h3>
         <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Student</th>
-                    <th>Age</th>
-                    <th>Last Attendance</th>
-                    <th>Status</th>
-                    <th>Mark Attendance</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for student in students %}
-                    <tr>
-                        <td>{{ student.student.first_name }} {{ student.student.last_name }}</td>
-                        <td>{{ student.age }}</td>
-                        <td>{{ student.created_at|date:"d/m/Y - H:i" }}</td>
-                        <td>
-                        {% if student.created_at.date == today and student.student.date_joined.date < today %}
+            <tr>
+                <th>Student</th>
+                <th>Attendance</th>
+                <th>Last Attendance</th>
+                <th>Actions</th>
+            </tr>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.student.first_name }} {{ student.student.last_name }}</td>
+                <td>
+                    {% if student.last_attended %}
+                        {% if student.last_attended == today %}
                             ✅ Attended today
                         {% else %}
                             ❌ Absent today
                         {% endif %}
-                        </td>
-                        <td>
-                            <form action="{% url 'edu:mark_attendance' student.student.id %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-success">Mark Attendance</button>
-                            </form>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+                    {% else %}
+                        ❌ Never attended
+                    {% endif %}
+                </td>
+                <td>
+                    {% if student.last_attended %}
+                        {{ student.last_attended }}
+                    {% else %}
+                        --
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="POST" action="{% url 'edu:mark_attendance' student.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-sm btn-second" type="submit">Mark Attendance</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
         </table>
     </div>
-
-
-
-
+    <div class="container bio" id="termos-de-uso">
+        <div class="row">
+            <div>
+                <fieldset>
+                    <h3 class="login-h3">Add student</h3>
+                    <form method="POST" action="{% url 'edu:dashboard' %}">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input class="btn btn-sm btn-main button-login" type="submit" value="add student"/>
+                    </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
 </div>
+</article>
 
 {% endblock %}

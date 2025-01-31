@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container-mobile text-center">
+  <h1 class="h1-home">🌴 Hello, {{ request.user.first_name }}</h1>
+  <p class="p-first additional-padding-bottom">Explore our courses</p>
+</div>
+
+<article class="dashboard">
+    <div class="courses" id="courses"> 
+        <div class="text-center course">
+                {% for course in courses %}
+                    {% if course.future_teachers %}
+                    <div class="col">
+                        
+                        <div class="card">
+                            <img class="image-tools" src="{{ course.image.url|safe }}">
+                            <div class="card-body">
+                                <p class="future-teachers">future teachers friendly</p>
+                                <h5 class="card-title">{{ course.title }} This is a course for future teachers</h5>
+                                <p class="additional-padding-bottom course-paragraph">{{ course.description }}</p>
+                                <a href="{% url 'edu:course_detail' course.id %}" class="btn btn-sm btn-main"><i class="bi bi-book"></i> Access Course</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+
+                {% for course in courses %}
+                    {% if not course.future_teachers %}
+                    <div class="col">
+                        <div class="card">
+                            <img class="image-tools" src="{{ course.image.url|safe }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ course.title }}</h5>
+                                <p class="additional-padding-bottom course-paragraph">{{ course.description }}</p>
+                                <a href="{% url 'edu:course_detail' course.id %}" class="btn btn-sm btn-main"><i class="bi bi-book"></i> Access Course</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+        </div>
+    </div>
+</article>
+
+{% endblock %}

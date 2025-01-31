@@ -1,5 +1,5 @@
 from django.contrib.messages.context_processors import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.http import StreamingHttpResponse
@@ -10,7 +10,7 @@ import ollama
 
 @login_required
 def index(request):
-    return render(request, "oasis-ai/index.html", {})
+    return redirect("oasis-chat:ollama_chat")
 
 @login_required
 def chat(request):
@@ -48,4 +48,4 @@ def ollama_translate(request):
 
         return StreamingHttpResponse(stream(), content_type="text/plain")
 
-    return render(request, "oasis-ai/translate.html")
+    return render(request, "oasis-ai/chat.html")

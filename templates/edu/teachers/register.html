@@ -10,12 +10,11 @@
     <div class="row">
         <div>
             <fieldset>
-                <h3 class="h1-home login-h3">Add student</h1>
-                <br>
-                <form action="" method="post">
+                <h3 class="login-h3">Add student</h3>
+                <form method="POST" action="{% url 'edu:addStudent' %}">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <input class="btn btn-sm btn-main button-login" type="submit" value="add student"/>
+                    <button type="submit">Add Student</button>
                 </form>
             </fieldset>
         </div>

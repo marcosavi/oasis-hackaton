@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
 from django.contrib.auth.forms import UserCreationForm  
 from django.utils import timezone
-
+from django.contrib import messages
 
 # Create your views here.
 class login(LoginView):
@@ -73,6 +73,11 @@ def tools(request):
     return render(request, "edu/teachers/tools.html", {"courses": courses})
 
 @login_required
+def courses(request):
+    courses = Course.objects.all() 
+    return render(request, "edu/courses/index.html", {"courses": courses})
+
+@login_required
 def fetching(request):
     return render(request, "edu/teachers/fetching.html", {})
 
@@ -85,25 +90,38 @@ def dashboard(request):
     selected_course_ids = request.session.get("selected_courses", [])
     courses = Course.objects.filter(id__in=selected_course_ids) if selected_course_ids else []  
     students = StudentProfile.objects.filter(created_by=request.user)
-    today = timezone.now().date() 
+    today = timezone.now().date()
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST, request=request)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, f"✅ Student {user.first_name} {user.last_name} added successfully!")
+            return redirect('edu:dashboard')
+    else:
+        form = CustomUserCreationForm(request=request)  
+
     return render(
         request, 
         "edu/teachers/dashboard.html", 
-        {"courses": courses, "students": students, 'today': today}
+        {"courses": courses, "students": students, "today": today, "form": form}
     )
 
 def addStudent(request):  
     if request.method == "POST":  
         form = CustomUserCreationForm(request.POST, request=request)
         if form.is_valid():  
-            form.save()  
-            return redirect('edu:dashboard')
-    else:  
-        form = CustomUserCreationForm(request=request)  
-    return render(request, 'edu/teachers/register.html', {'form': form}) 
+            student = form.save(commit=False)  
+            student.created_by = request.user 
+            student.save() 
+            return redirect('edu:dashboard') 
+    return redirect('edu:dashboard')
 
 def mark_attendance(request, student_id):
-    student = get_object_or_404(StudentProfile, student__id=student_id)
-    student.created_at = timezone.now()
-    student.save()
+    student = get_object_or_404(StudentProfile, id=student_id)
+    today = timezone.now().date()
+    if student.last_attended == today:
+        messages.info(request, f"⚠️ Attendance already marked for {student.student.first_name} today.")
+    else:
+        student.mark_attendance()
+        messages.success(request, f"✅ Attendance marked for {student.student.first_name} {student.student.last_name}!")
     return redirect('edu:dashboard')
