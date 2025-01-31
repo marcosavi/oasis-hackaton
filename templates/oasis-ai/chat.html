@@ -1,33 +1,115 @@
 {% extends "base.html" %}
 {% load static %}
-
+<script id="MathJax-script" async src="{% static 'js/mathjax.js' %}"></script>
 {% block title %}Chat{% endblock %}
 
 {% block content %}
 
-<div class="container-mobile text-center">
+<div class="container-mobile oasis-chat text-center">
     <p class="p-first additional-padding-bottom">What can I help you with? </p>
-    <div class="div-ai">
-        <textarea type="text" id="prompt" placeholder="Message OasisConnect"></textarea>
-        <button class="btn-main-ai" onclick="sendMessage()">Send</button>
+    <div id="chat-response">
     </div>
-    <div id="response"></div>    
+    <div class="div-ai">
+        <div class="div-ai-container">
+            <textarea type="text" id="prompt" placeholder="Message OasisConnect"></textarea>
+            <button class="btn-main-ai" onclick="sendMessage()">▲</button>
+        </div>
+    </div>
 </div>
+
+<style>
+    .code-block {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        font-family: monospace;
+        white-space: pre-wrap;
+    }
+
+    .math-block {
+        background-color: #e8f0fe;
+        padding: 10px;
+        border-radius: 5px;
+        font-family: serif;
+        display: inline-block;
+    }
+    .bold-text {
+        font-weight: bold;
+    }
+    .section-title {
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-top: 10px;
+        display: block;
+    }
+</style>
+
+
 <script>
+    document.querySelectorAll("textarea").forEach(function(textarea) {
+      textarea.style.height = textarea.scrollHeight + "px";
+      textarea.style.overflowY = "hidden";
+
+      textarea.addEventListener("input", function() {
+        this.style.height = "auto";
+        this.style.height = this.scrollHeight + "px";
+      });
+    });
+
+    function sanitizeHTML(str) {
+        var temp = document.createElement("div");
+        temp.textContent = str;
+        return temp.innerHTML;
+    }
+
+    function formatText(text) {
+        text = text.replace(/```html([\s\S]*?)```/g, '<pre class="code-block">$1</pre>');
+        text = text.replace(/\*\*(.*?)\*\*/g, '<span class="bold-text">$1</span>');
+        text = text.replace(/\\\((.*?)\\\)/g, '<span class="math-block">($1)</span>');
+        text = text.replace(/\\\[(.*?)\\\]/g, '<div class="math-block">[$1]</div>');
+        text = text.replace(/###\s*(.*?)(?=\n|$)/g, '<span class="section-title">$1</span><br>');
+
+        text = text.replace(/\\sqrt{([^}]*)}/g, '√($1)');
+        text = text.replace(/\\cdot/g, ' · ');
+        return text;
+    }
+
     function sendMessage() {
         const prompt = document.getElementById("prompt").value;
-        const responseDiv = document.getElementById("response");
+        const btn = document.querySelector(".btn-main-ai");
+        const responseDiv = document.getElementById("chat-response");
         responseDiv.innerHTML = "";
 
+        btn.classList.add("loader")
+        btn.disabled = true;
+
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "/oasis-ai/chat/", true);
+        xhr.open("POST", "/ai/chat/", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-        xhr.onprogress = function() {
-            responseDiv.innerHTML = xhr.responseText;
+        xhr.onprogress = function () {
+            let sanitizedResponse = sanitizeHTML(xhr.responseText);
+            responseDiv.innerHTML = formatText(sanitizedResponse);
+        };
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let sanitizedResponse = sanitizeHTML(xhr.responseText);
+                responseDiv.innerHTML = formatText(sanitizedResponse);
+                btn.classList.remove("loader");
+                btn.disabled = false;
+            }
         };
 
         xhr.send("prompt=" + encodeURIComponent(prompt));
+
+
     }
+
+    window.MathJax = {
+        tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
+        svg: {fontCache: 'global'}
+    };
 </script>
+
 {% endblock %}
