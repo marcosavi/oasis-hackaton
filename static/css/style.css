@@ -174,7 +174,8 @@ header {
 .div-ai {
     position: absolute;
     bottom: 0%;
-    width: 100%;
+    width: 90%;
+    margin: 0 calc(5% / 2);
 }
 
 .div-ai-container {

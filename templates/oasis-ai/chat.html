@@ -74,36 +74,49 @@
         return text;
     }
 
-    function sendMessage() {
+    async function sendMessage() {
         const prompt = document.getElementById("prompt").value;
         const btn = document.querySelector(".btn-main-ai");
         const responseDiv = document.getElementById("chat-response");
         responseDiv.innerHTML = "";
-
-        btn.classList.add("loader")
+    
+        btn.classList.add("loader");
         btn.disabled = true;
-
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "/ai/chat/", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-        xhr.onprogress = function () {
-            let sanitizedResponse = sanitizeHTML(xhr.responseText);
-            responseDiv.innerHTML = formatText(sanitizedResponse);
-        };
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                let sanitizedResponse = sanitizeHTML(xhr.responseText);
-                responseDiv.innerHTML = formatText(sanitizedResponse);
-                btn.classList.remove("loader");
-                btn.disabled = false;
+    
+        try {
+            const response = await fetch("/ai/chat/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: "prompt=" + encodeURIComponent(prompt),
+            });
+    
+            if (!response.body) {
+                throw new Error("ReadableStream not supported!");
             }
-        };
-
-        xhr.send("prompt=" + encodeURIComponent(prompt));
-
-
+    
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let accumulatedText = "";
+    
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+    
+                const chunk = decoder.decode(value, { stream: true });
+                accumulatedText += chunk;
+    
+                // Update responseDiv progressively
+                responseDiv.innerHTML = formatText(sanitizeHTML(accumulatedText));
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            responseDiv.innerHTML = "<p style='color: red;'>An error occurred while fetching the response.</p>";
+        } finally {
+            btn.classList.remove("loader");
+            btn.disabled = false;
+        }
     }
 
     window.MathJax = {
