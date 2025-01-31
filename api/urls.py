@@ -12,7 +12,4 @@ urlpatterns = [
     path('login/', views.login.as_view(), name="login"),
     path('logout/', views.logout_view, name="logout"),
     path('ai/', include('oasis-ai.urls')),
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

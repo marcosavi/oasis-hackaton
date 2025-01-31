@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+
 
 app_name = "edu"
 
@@ -19,4 +21,5 @@ urlpatterns = [
     path("dashboard/", views.dashboard, name="dashboard"),
     path('mark_attendance/<int:student_id>/', views.mark_attendance, name='mark_attendance'),
     path("students/", views.students, name = "students"),
-]
+] 
+
