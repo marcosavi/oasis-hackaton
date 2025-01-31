@@ -16,8 +16,8 @@ jobs:
           sudo fuser -k 8080/tcp || true
 
           # Set up virtual environment
-          python -m venv venv
-          source venv/bin/activate
+          python -m venv /home/belix/dev/oasis
+          source /home/belix/dev/oasis/bin/activate
           pip install -r requirements.txt
           python manage.py collectstatic --noinput
 
