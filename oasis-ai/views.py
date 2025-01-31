@@ -48,4 +48,4 @@ def ollama_translate(request):
 
         return StreamingHttpResponse(stream(), content_type="text/plain")
 
-    return render(request, "oasis-ai/chat.html")
+    return render(request, "oasis-ai/translate.html")
