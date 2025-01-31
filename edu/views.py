@@ -1,8 +1,12 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
-from .models import Course, Chapter
+from .models import Course, Chapter, StudentProfile
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
+from .forms import CustomUserCreationForm
+from django.contrib.auth.forms import UserCreationForm  
+from django.utils import timezone
+
 
 # Create your views here.
 class login(LoginView):
@@ -76,7 +80,30 @@ def fetching(request):
 def futureTeachers(request):
     return render(request, "edu/future-teachers/future-teachers.html", {})
 
+@login_required
 def dashboard(request):
     selected_course_ids = request.session.get("selected_courses", [])
-    courses = Course.objects.filter(id__in=selected_course_ids) if selected_course_ids else [] 
-    return render(request, "edu/teachers/dashboard.html", {"courses": courses})
+    courses = Course.objects.filter(id__in=selected_course_ids) if selected_course_ids else []  
+    students = StudentProfile.objects.filter(created_by=request.user)
+    today = timezone.now().date() 
+    return render(
+        request, 
+        "edu/teachers/dashboard.html", 
+        {"courses": courses, "students": students, 'today': today}
+    )
+
+def addStudent(request):  
+    if request.method == "POST":  
+        form = CustomUserCreationForm(request.POST, request=request)
+        if form.is_valid():  
+            form.save()  
+            return redirect('edu:dashboard')
+    else:  
+        form = CustomUserCreationForm(request=request)  
+    return render(request, 'edu/teachers/register.html', {'form': form}) 
+
+def mark_attendance(request, student_id):
+    student = get_object_or_404(StudentProfile, student__id=student_id)
+    student.created_at = timezone.now()
+    student.save()
+    return redirect('edu:dashboard')

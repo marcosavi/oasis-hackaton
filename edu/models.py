@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.files.storage import FileSystemStorage
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
 
@@ -40,3 +41,15 @@ class Alternative(models.Model):
     is_correct = models.BooleanField(default=False)
     def __str__(self):
         return f"{self.text}"
+    
+class StudentProfile(models.Model):
+    student = models.OneToOneField(User, on_delete=models.CASCADE, related_name="student_profile")
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="created_students", blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    age = models.IntegerField()
+    def mark_attendance(self):
+        self.created_at = datetime.datetime.now()
+        self.save()
+
+    def __str__(self):
+        return f"{self.student.first_name} {self.student.last_name} - Last attended: {self.created_at}"

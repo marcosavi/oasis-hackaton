@@ -61,8 +61,17 @@ a {
     margin: 0 auto;
 }
 
+.courses {
+    display: flex;
+    gap: 20px;
+    border-collapse: collapse;
+}
+
+.nav {
+    border-collapse: collapse;
+}
 .container-mobile {
-    max-width: 479px;
+    max-width: 900px;
     padding: 0 ;
     margin: 0 auto;
     padding: 40px 0px 0px 0px;
@@ -113,9 +122,6 @@ a {
     border-right-color: transparent;
 }
 
-.p-first {
-    max-width: 500px;
-}
 
 header {
     justify-content: center;

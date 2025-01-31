@@ -16,6 +16,7 @@
         </ul>
 
         {% if courses %}
+            <div class="courses">
             {% for course in courses %}
             <div class="col">
                 <div class="card">
@@ -28,10 +29,54 @@
                 </div>
             </div>
             {% endfor %}
+            
         {% else %}
             <p>No courses selected yet.</p>
         {% endif %}
     </div>
+    </div>
+
+
+
+    <div class="container-mobile text-center">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Age</th>
+                    <th>Last Attendance</th>
+                    <th>Status</th>
+                    <th>Mark Attendance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                    <tr>
+                        <td>{{ student.student.first_name }} {{ student.student.last_name }}</td>
+                        <td>{{ student.age }}</td>
+                        <td>{{ student.created_at|date:"d/m/Y - H:i" }}</td>
+                        <td>
+                        {% if student.created_at.date == today and student.student.date_joined.date < today %}
+                            ✅ Attended today
+                        {% else %}
+                            ❌ Absent today
+                        {% endif %}
+                        </td>
+                        <td>
+                            <form action="{% url 'edu:mark_attendance' student.student.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success">Mark Attendance</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+
 </div>
 
 {% endblock %}
