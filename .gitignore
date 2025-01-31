@@ -3,7 +3,6 @@
 *.pyc
 __pycache__
 db.sqlite3
-media
 
 # Environments 
 .env 
@@ -13,3 +12,6 @@ venv/
 ENV/ 
 env.bak/ 
 venv.bak/ 
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore
