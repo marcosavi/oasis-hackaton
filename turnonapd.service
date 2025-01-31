@@ -1,0 +1,16 @@
+# /etc/systemd/system/turnonapd.service
+[Unit]
+Description=Run turnonapd.sh after boot
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/bin/bash -c "sleep 10 && sudo /home/belix/turnonapd.sh"
+WorkingDirectory=/home/belix/
+StandardOutput=inherit
+StandardError=inherit
+Restart=on-failure
+User=belix
+
+[Install]
+WantedBy=multi-user.target

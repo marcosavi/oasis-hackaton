@@ -1,0 +1,13 @@
+# /etc/systemd/system/oasis.service
+[Unit]
+Description=Oasis server
+
+[Service]
+User=belix
+WorkingDirectory=/home/belix/actions-runner/_work/oasis-hackaton/oasis-hackaton
+Environment="PYTHONPATH=/home/belix/actions-runner/_work/oasis-hackaton/oasis-hackaton"
+ExecStart=/bin/bash -c 'source /home/belix/dev/oasis/bin/activate && exec python manage.py runserver 0.0.0.0:8080'
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
