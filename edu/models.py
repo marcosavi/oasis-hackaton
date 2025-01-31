@@ -28,7 +28,7 @@ class Quiz(models.Model):
     title = models.CharField(max_length=255)
     chapter = models.OneToOneField(Chapter, on_delete=models.CASCADE, related_name='quiz')
     def __str__(self):
-        return f"Quiz for Course {self.chapter.course.id} Chapter {self.chapter.id}"
+        return f"Quiz for Course {self.chapter.course.id} Chapter {self.chapter.orderd}"
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')

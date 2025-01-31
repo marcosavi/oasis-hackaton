@@ -92,8 +92,14 @@ a {
 }
 
 .additional-padding-bottom {
-    padding-bottom: 13px;
+    padding-bottom: 12px;
     font-size: 1.875rem;
+}
+
+.chapters {
+    margin: 10px auto 25px auto;
+    text-align: left;
+    gap: 5px;
 }
 
 .qualidade-box {
@@ -311,7 +317,7 @@ figcaption {
 
 .card {
     padding: 20px;
-    max-width: 400px;
+    max-width: 500px;
 }
 
 .container .h1-home {

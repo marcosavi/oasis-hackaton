@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
 {% block content %}
 
 <div class="container-mobile text-center">
@@ -9,7 +12,7 @@
 
 <article class="dashboard">
 
-    <div class="courses" style="padding-bottom: 25px">
+    <div class="courses">
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#courses">Courses based on your preferences</a>
@@ -49,18 +52,18 @@
     <div class="text-center course">
             <div class="col">
                 <div class="card">
-                    <img class="image-tools" src="{% static 'images/oasisconnect.webp' %}">
+                    <img class="image-tools" src="{% static 'images/chat.jpg' %}">
                     <div class="card-body">
-                        <h5 class="card-title">Ask to our AI chatboot any educational question</h5>
+                        <h5 class="card-title">Real time AI tutor for question generation</h5>
                         <p class="additional-padding-bottom course-paragraph">Use OasisConnect's translation feature to help your multi-lingual classroom.</p>
-                        <a href="{% url 'oasis-chat:ollama_chat' %}" class="btn btn-sm btn-main"><i class="bi bi-book"></i> Access Course</a>
+                        <a href="{% url 'oasis-chat:ollama_chat' %}" class="btn btn-sm btn-main"><i class="bi bi-book"></i> Access platform</a>
                     </div>
                 </div>
             </div>
 
             <div class="col">
                 <div class="card">
-                    <img class="image-tools" src="{% static 'images/oasisconnect.webp' %}">
+                    <img class="image-tools" src="{% static 'images/translate.jpg' %}">
                     <div class="card-body">
                         <h5 class="card-title">Translate lessons to other languages</h5>
                         <p class="additional-padding-bottom course-paragraph">Use OasisConnect's translation feature to help your multi-lingual classroom.</p>

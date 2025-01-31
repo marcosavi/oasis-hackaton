@@ -5,31 +5,23 @@
 
 {% block content %}
 
+
+
 <div class="container-mobile text-center">
   <h1 class="h1-home">{{ course.title }}</h1><br>
-  <p class="p-first additional-padding-bottom">{{ course.description }}</p>
+  <p class="p-first additional-padding-bottom">{{ course.description }}</p>        
+ 
+    <div class="card chapters">
+      <a class="nav-link active" aria-current="page" href="#"><b>Chapters</b></a>
+      {% for chapter in chapters %}
+        <p class="course-paragraph">{{chapter.order}}: {{chapter.title}}</p>
+      {% endfor %}
+    </div>
+
   <img class="image-tools" src="{{ course.image.url|safe }}">
   <br><br>
   <a href="{% url 'edu:course_detail' course.id %}chapter-1/"><button type="button" class="btn btn-sm btn-main big"><i class="bi bi-mortarboard"></i>Start Course</button></a>
 </div> 
-  
-<div class="parent-div">
-      <div class="container-mobile text-center">
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Chapters</a>
-          </li>
-        </ul>
-          
-            <div class="col">
-              <div class="card">
-                {% for chapter in chapters %}
-                  <p class="course-paragraph">{{chapter.id}}: {{chapter.title}}</p>
-                {% endfor %}
-              </div>
-            </div>
-      </div>
-  </div>
-</div>
+
     
 {% endblock %}
